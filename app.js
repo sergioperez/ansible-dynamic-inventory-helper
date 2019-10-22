@@ -8,17 +8,27 @@ const db_inventory = { "databases" : ["dbnode0.mycorp.com", "dbnode1.mycorp.com"
 // GET method route
 app.get('/', function (req, res) {
 	// TODO: Add an argument, so it is possible to query using a group name
-  res.send(get_node_group("web_servers"))
+	groups = ["all"]
+  res.send(get_node_groups(groups))
 })
 
-function get_node_group(group) {
+app.get('/groups', function (req, res) {
+	// TODO: Add an argument, so it is possible to query using a group name
+	groups = req.query.names.split(",")
+  res.send(get_node_groups(groups))
+})
+
+function get_node_groups(groups) {
 	// This function would perform a query to the hosts database
-	if(group == 'all') {
+	if(groups.includes("all")) {
+    console.log(groups)
 		return db_inventory
 	}
 	else {
-		inventory = {}
-		inventory[group] = db_inventory[group]
+    inventory = {}
+    groups.forEach((group) => {
+      inventory[group] = db_inventory[group]
+    })
 		return inventory
 	}
 }

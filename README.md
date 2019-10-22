@@ -21,3 +21,20 @@ curl localhost:3000
 ```
 
 Now, edit it to make it retrieve your hosts instead of the demo hosts. Using PostgreSQL, MariaDB, or whatever you would like to use :)
+
+# Testing the inventory
+
+To test the behaviour of the inventory, run the microservice and list the hosts with the demo inventory script ansible\_inventory.sh
+
+```bash
+ansible-inventory --list -i inventory_all_hosts.sh 
+```
+
+There are more examples, showing how this supports querying for several hosts
+
+```bash
+ansible-inventory --list -i inventory_web_servers.sh 
+```
+```bash
+ansible-inventory --list -i inventory_two_groups.sh
+```
